@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./hover.css";
+import "./App.css";
 import Form from "./Form";
 // import { createStore } from 'redux'
 
@@ -11,6 +11,11 @@ export default class App extends Component {
       Name: "",
       email: "",
       phone: "",
+      hobby:{
+        cricket:false,
+        football:false,
+        dance:false
+      },
       id: 0,
       entryList: []
     };
@@ -26,15 +31,33 @@ export default class App extends Component {
     this.setState({
       Name: "",
       email: "",
-      phone: ""
-      // hobby:
-      // {
-      //   cricket: false,
-      //   football: false,
-      //   dance: false
-      // }
+      phone: "",
+      hobby:
+      {
+        cricket: false,
+        football: false,
+        dance: false
+      }
     });
+
+
   };
+
+  handleCheck=(e)=>{
+    let keys = Object.keys(this.state.hobby);
+    let currentKey = keys.filter(el => el === e.target.name);
+
+    this.setState({
+      ...this.state,
+      hobby: {
+        ...this.state.hobby,
+        [currentKey]: !this.state.hobby[currentKey]
+      }
+    });
+
+
+    
+  }
 
   updateEntry = fields => {
     fields.preventDefault();
@@ -46,7 +69,8 @@ export default class App extends Component {
       Name: this.state.Name,
       email: this.state.email,
       phone: this.state.phone,
-      id: this.state.id
+      id: this.state.id,
+      hobby:this.state.hobby
     };
 
     this.setState({
@@ -70,10 +94,12 @@ export default class App extends Component {
   
 
   render() {
+    
     return (
       <div className="App">
-        <div className='text-center'> <h1>MoodCafe Task</h1></div>
-        
+        {/* {console.log(Object.keys(this.state.hobby)[0])} */}
+        {console.log(this.state.hobby)}
+        <h1>MoodCafe Task</h1>
         <div className="container-fluid">
           <div className="row " style={{ height: "500px" }}>
             {/* Form Component */}
@@ -81,6 +107,7 @@ export default class App extends Component {
               <Form
                 {...this.state}
                 grabValue={this.grabValue}
+                handleCheck={this.handleCheck}
                 updateEntry={this.updateEntry}
               />
             </div>
@@ -88,7 +115,7 @@ export default class App extends Component {
             {/*  display, which has a list of entries submitted by the left form with update option */}
             <div className="col bg-light text-dark mt-5">
               <div>
-                <span className="display-4 hvr-underline-from-center">Entries</span>
+                <span className="display-4">Entries</span>
               </div>
               <div id="entryDiv">
                 {this.state.entryList.map((item, index) => {
@@ -98,7 +125,14 @@ export default class App extends Component {
                       <div>Name: {item.Name}</div>
                       <div>Email: {item.email}</div>
                       <div>Phone: {item.phone}</div>
-                      
+                      <div>Hobbies: 
+                        {item.hobby.cricket ? <span> {Object.keys(item.hobby)[0]} ; </span>:null}
+                         {item.hobby.football ? <span> {Object.keys(item.hobby)[1]} ; </span>:null}
+                         {item.hobby.dance ? <span> {Object.keys(item.hobby)[2]} ; </span>:null}
+                         </div>                   
+
+
+                      {console.log(item.hobby)}
                       </div>
                       <button className="btn-light col-sm-2" onClick={() => this.deleteEntry(item.id)}>
                         Delete entry

@@ -1,15 +1,13 @@
 import React from 'react'
 
 
-export default (props, {store}) => {
+export default (props) => {
 
-function handleCheck(){
-    console.log('checked')
-}
+
 
 return (
     <div>
-    <form className='mt-5 text-center' onSubmit={fields=>props.updateEntry(fields)}>
+    <form className='mt-5' onSubmit={fields=>props.updateEntry(fields)}>
 {/* {console.log(props)} */}
               {/* Name Row */}
               <div className="form-group row">
@@ -49,10 +47,12 @@ return (
               <label className="col-sm-6 col-form-label">Select any Hobby / Hobbies : </label>
                 <div className="form-check form-check-inline">
                 <input 
-                className="form-check-input" 
+                name='cricket'
+                checked={props.hobby.cricket}
+                className="form-check-input checkBox" 
                 type="checkbox"  
                 id="inlineCheckbox1"
-                onChange={handleCheck}
+                onChange={(e)=>props.handleCheck(e)}                
                  />
                 
                 <label className="form-check-label" > Cricket </label>
@@ -60,9 +60,13 @@ return (
 
                 <div className="form-check form-check-inline">
                   <input 
-                  className="form-check-input" 
+                  name='football'
+                  checked={props.hobby.football}
+                  className="form-check-input checkBox" 
                   type="checkbox" 
                   id="inlineCheckbox2" 
+                  value='true'
+                  onChange={(e)=>props.handleCheck(e)}    
                   />
                   
                   <label className="form-check-label" > Football </label>
@@ -70,9 +74,12 @@ return (
 
                 <div className="form-check form-check-inline">
                   <input 
-                  className="form-check-input" 
+                  name='dance'
+                  checked={props.hobby.dance}
+                  className="form-check-input checkBox" 
                   type="checkbox" 
-                  id="inlineCheckbox2" 
+                  id="inlineCheckbox2"
+                  onChange={(e)=>props.handleCheck(e)}    
                   />
                   
                   <label className="form-check-label" > Dance </label>
