@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./App.css";
+import "./hover.css";
 import Form from "./Form";
 // import { createStore } from 'redux'
 
@@ -72,7 +72,8 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>MoodCafe Task</h1>
+        <div className='text-center'> <h1>MoodCafe Task</h1></div>
+        
         <div className="container-fluid">
           <div className="row " style={{ height: "500px" }}>
             {/* Form Component */}
@@ -87,21 +88,21 @@ export default class App extends Component {
             {/*  display, which has a list of entries submitted by the left form with update option */}
             <div className="col bg-light text-dark mt-5">
               <div>
-                <span className="display-4">Entries</span>
+                <span className="display-4 hvr-underline-from-center">Entries</span>
               </div>
               <div id="entryDiv">
                 {this.state.entryList.map((item, index) => {
                   return (
-                    <div key={item.id}>
+                    <div className='row bg-info mb-2 text-white' key={item.id}>
+                      <div className='col-sm-10'>
                       <div>Name: {item.Name}</div>
-                      <div>
-                        <span>Email: {item.email}</span>
-                        <span>Phone: {item.phone}</span>
+                      <div>Email: {item.email}</div>
+                      <div>Phone: {item.phone}</div>
+                      
                       </div>
-
-                      <button className="btn-info" onClick={() => this.deleteEntry(item.id)}>
+                      <button className="btn-light col-sm-2" onClick={() => this.deleteEntry(item.id)}>
                         Delete entry
-                      </button>
+                      </button>  
                     </div>
                   );
                 })}

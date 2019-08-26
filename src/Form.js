@@ -9,7 +9,7 @@ function handleCheck(){
 
 return (
     <div>
-    <form className='mt-5' onSubmit={fields=>props.updateEntry(fields)}>
+    <form className='mt-5 text-center' onSubmit={fields=>props.updateEntry(fields)}>
 {/* {console.log(props)} */}
               {/* Name Row */}
               <div className="form-group row">
